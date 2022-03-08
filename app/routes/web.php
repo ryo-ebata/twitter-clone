@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::middleware(['middleware', 'auth'])->group( function(){
+
+    Route::resource('users', UsersController::class);
+
+});
