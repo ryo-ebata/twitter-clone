@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SampleController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
     Route::resource('users', UsersController::class, ['only' => ['index', 'show', 'edit', 'update']]);
 
+    // フォロー/フォロー解除を追加
+    Route::post('users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
+    Route::delete('users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
 //});
+
+Route::get('sample/log', [SampleController::class, 'log']);

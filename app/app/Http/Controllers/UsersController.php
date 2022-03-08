@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Tweet;
 use App\Models\Follower;
+use Illuminate\Support\Facades\Log;
+use illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -23,6 +25,39 @@ class UsersController extends Controller
         return view('users.index', [
             'all_users' => $all_users
         ]);
+    }
+
+    //フォロー機能
+
+    // フォロー
+    public function follow(User $user)
+    {
+        
+        $follower = auth()->user();
+        // フォローしているか
+        
+        $is_following = $follower->isFollowing($user->id);
+        Log::info($user);
+        if (!$is_following) {
+            
+            // フォローしていなければフォローする
+            $follower->follow($user->id);
+            
+            return redirect('/users');
+        }
+    }
+
+    // フォロー解除
+    public function unfollow(User $user)
+    {
+        $follower = auth()->user();
+        // フォローしているか
+        $is_following = $follower->isFollowing($user->id);
+        if($is_following) {
+            // フォローしていればフォローを解除する
+            $follower->unfollow($user->id);
+            return redirect('/users');
+        }
     }
 
     /**
