@@ -23,8 +23,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['middleware', 'auth'])->group( function(){
+//Route::middleware(['middleware', 'auth'])->group( function(){
 
-    Route::resource('users', UsersController::class);
+    Route::resource('users', UsersController::class, ['only' => ['index', 'show', 'edit', 'update']]);
 
-});
+//});
