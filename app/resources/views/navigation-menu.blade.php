@@ -21,6 +21,11 @@
                         {{ __('プロフィール') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('tweets.create', auth()->user()->id) }}" :active="request()->routeIs('tweets.create')">
+                        {{ __('新規ツイート') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
