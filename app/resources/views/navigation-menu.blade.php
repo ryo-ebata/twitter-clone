@@ -12,8 +12,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('ユーザー一覧') }}
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('ユーザー') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            <x-jet-dropdown-link href="{{ route('users.edit', auth()->user()->id) }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
 
