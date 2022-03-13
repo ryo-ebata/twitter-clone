@@ -5,7 +5,7 @@
         <div class="row justify-center" style="display: grid; justify-content: center;">
             <div class="col-md-8" style="margin: 3rem 0; ">
                 @foreach ($all_users as $user)
-                    <div class="card">
+                    <div class="card" style="width: 80vw;">
                         <div class="card-haeder p-3 w-100 d-flex" style="display: flex; padding: 1rem; border: solid silver; background-color: #fff; width: 100%;">
                             <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50" style="border-radius: 50%;">
                             <div class="ml-2 d-flex flex-column" style="margin-left: 0.5rem; display:flex; flex-direction: column;">
@@ -24,7 +24,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button type="submit" class="btn btn-danger">フォロー解除</button>
+                                        <button type="submit" class="btn btn-danger" style="display: inline-block; padding: 0.5em 1em; text-decoration: none; background: red; color: #FFF; border-bottom: solid 4px #627295; border-radius: 3px; margin-left: 1rem; ">フォロー解除</button>
                                     </form>
                                 @else
                                     <form action="{{ route('follow', $user->id) }}" method="POST">
