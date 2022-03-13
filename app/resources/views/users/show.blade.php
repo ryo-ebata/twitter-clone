@@ -1,36 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 mb-3">
+<div class="container" style="position: relative">
+    <div class="row justify-content-center" style="position:absolute; top: 50%; left: 20%;  width: 80%;">
+        <div class="col-md-8 mb-3" style="display: flex; justify-content:center; background-color: white; border-radius: 10px;">
             <div class="card">
-                <div class="d-inline-flex">
+                <div class="d-inline-flex" style="display: flex;">
                     <div class="p-3 d-flex flex-column">
-                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="100" height="100">
+                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" style="width: 100px; height: 100px; border-radius: 50%;">
                         <div class="mt-3 d-flex flex-column">
-                            <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
-                            <span class="text-secondary">{{ $user->screen_name }}</span>
+                            <h4 class="mb-0 font-weight-bold" style="font-weight:bold; font-size:larger;">{{ $user->name }}</h4>
+                            <span class="text-secondary" style="font-size: medium;">{{ $user->screen_name }}</span>
                         </div>
                     </div>
-                    <div class="p-3 d-flex flex-column justify-content-between">
+                    <div class="p-3 d-flex flex-column justify-content-between" style="display:flex; justify-content: space-between">
                         <div class="d-flex">
                             <div>
                                 @if ($user->id === Auth::user()->id)
-                                    <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                                    <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary" style="padding: 1em; padding: 1rem; margin: 1rem;  color: white;  font-size: 18px;  font-weight: 200;  background-color: blue;  box-shadow: 0 5px 0 #aaaaaa;">プロフィールを編集する</a>
                                 @else
                                     @if ($is_following)
                                         <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-danger">フォロー解除</button>
+                                            <button type="submit" class="btn btn-danger" style="padding: 1em; padding: 1rem; margin: 1rem;  color: white;  font-size: 18px;  font-weight: 200;  background-color: red;  box-shadow: 0 5px 0 #aaaaaa;">フォロー解除</button>
                                         </form>
                                     @else
                                         <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
                                             {{ csrf_field() }}
 
-                                            <button type="submit" class="btn btn-primary">フォローする</button>
+                                            <button type="submit" class="btn btn-primary" style="padding: 1em; padding: 1rem; margin: 1rem;  color: white;  font-size: 18px;  font-weight: 200;  background-color: blue;  box-shadow: 0 5px 0 #aaaaaa;">フォローする</button>
                                         </form>
                                     @endif
 
@@ -41,16 +41,16 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <div class="p-2 d-flex flex-column align-items-center">
-                                <p class="font-weight-bold">ツイート数</p>
+                            <div class="p-2 d-flex flex-column align-items-center" style="display: flex;">
+                                <p class="font-weight-bold" style="font-weight: bold; margin-right: 1rem;">ツイート数</p>
                                 <span>{{ $tweet_count }}</span>
                             </div>
-                            <div class="p-2 d-flex flex-column align-items-center">
-                                <p class="font-weight-bold">フォロー数</p>
+                            <div class="p-2 d-flex flex-column align-items-center" style="display: flex;">
+                                <p class="font-weight-bold" style="font-weight: bold; margin-right: 1rem;">フォロー数</p>
                                 <span>{{ $follow_count }}</span>
                             </div>
-                            <div class="p-2 d-flex flex-column align-items-center">
-                                <p class="font-weight-bold">フォロワー数</p>
+                            <div class="p-2 d-flex flex-column align-items-center" style="display: flex;">
+                                <p class="font-weight-bold" style="font-weight: bold; margin-right: 1rem;">フォロワー数</p>
                                 <span>{{ $follower_count }}</span>
                             </div>
                         </div>
@@ -60,10 +60,10 @@
         </div>
         @if (isset($timelines))
             @foreach ($timelines as $timeline)
-                <div class="col-md-8 mb-3">
+                <div class="col-md-8 mb-3" style="column-count: 2; background-color: white; margin-top: 1rem; border-radius: 5px;">
                     <div class="card">
                         <div class="card-haeder p-3 w-100 d-flex">
-                            <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
+                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50" style="border-radius: 50%; object-fit: cover">
                             <div class="ml-2 d-flex flex-column flex-grow-1">
                                 <p class="mb-0">{{ $timeline->user->name }}</p>
                                 <a href="{{ url('users/' .$timeline->user->id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
@@ -92,13 +92,15 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="mr-3 d-flex align-items-center">
-                                <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
+                            <div style="display: flex;">
+                                <div class="mr-3 d-flex align-items-center" style="display: flex;">
+                                    <a href="#"><i class="far fa-comment fa-fw"></i></a>
+                                    <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
+                                </div>
+                                <div class="d-flex align-items-center" style="display: flex;">
+                                    <a href="#"><i class="far fa-comment fa-fw"></i></a>
+                                    <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
