@@ -16,6 +16,11 @@
                         {{ __('ユーザー') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('users.show', auth()->user()->id) }}" :active="request()->routeIs('users.show')">
+                        {{ __('プロフィール') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -97,7 +102,7 @@
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('users.edit', auth()->user()->id) }}">
-                                {{ __('Profile') }}
+                                {{ __('プロフィール編集') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -114,7 +119,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                         @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('ログアウト') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>

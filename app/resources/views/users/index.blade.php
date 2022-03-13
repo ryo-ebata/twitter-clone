@@ -6,7 +6,7 @@
             <div class="col-md-8" style="margin: 3rem 0; ">
                 @foreach ($all_users as $user)
                     <div class="card" style="width: 80vw;">
-                        <div class="card-haeder p-3 w-100 d-flex" style="display: flex; padding: 1rem; border: solid silver; background-color: #fff; width: 100%;">
+                        <div class="card-haeder p-3 w-100 d-flex" style="display: flex; padding: 1rem; margin: 1rem; background-color: #fff; width: 100%; box-shadow: 0 0 8px gray; border-radius: 10px;">
                             <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50" style="border-radius: 50%;">
                             <div class="ml-2 d-flex flex-column" style="margin-left: 0.5rem; display:flex; flex-direction: column;">
                                 <p class="mb-0" style="margin-bottom: 0;">{{ $user->name }}</p>
@@ -15,7 +15,7 @@
 
                             @if (auth()->user()->isFollowed($user->id))
                                 <div class="px-2">
-                                    <span class="px-1 bg-secondary text-light">フォローされています</span>
+                                    <span class="px-1 bg-secondary text-light" style="background-color: #6c757d; color:#FFF;">フォローされています</span>
                                 </div>
                             @endif
                             <div class="d-flex justify-content-end flex-grow-1">
