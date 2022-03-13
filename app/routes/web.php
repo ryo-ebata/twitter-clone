@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TweetsController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -38,3 +39,5 @@ Route::get('sample/log', [SampleController::class, 'log']);
 Route::get('dashboard', function(){
     return redirect('users');
 });
+
+Route::resource('tweets', TweetsController::class);

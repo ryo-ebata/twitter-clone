@@ -24,18 +24,18 @@
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-danger" style="padding: 1em; padding: 1rem; margin: 1rem;  color: white;  font-size: 18px;  font-weight: 200;  background-color: red;  box-shadow: 2px 2px 4px;">フォロー解除</button>
+                                            <button type="submit" class="btn btn-danger" style="display: inline-block; padding: 0.5em 1em; text-decoration: none; background: #dc143c; color: #FFF; border-bottom: solid 4px #627295; border-radius: 3px; margin-left: 1rem; font-weight: bold;">フォロー解除</button>
                                         </form>
                                     @else
                                         <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
                                             {{ csrf_field() }}
 
-                                            <button type="submit" class="btn btn-primary" style="padding: 1em; padding: 1rem; margin: 1rem;  color: white;  font-size: 18px;  font-weight: 200;  background-color: blue;  box-shadow: 2px 2px 4px;">フォローする</button>
+                                            <button type="submit" class="btn btn-primary" style="display: inline-block; padding: 0.5em 1em; text-decoration: none; background: #668ad8; color: #FFF; border-bottom: solid 4px #627295; border-radius: 3px; margin-left: 1rem; font-weight: bold;">フォローする</button>
                                         </form>
                                     @endif
 
                                     @if ($is_followed)
-                                        <span class="mt-2 px-1 bg-secondary text-light">フォローされています</span>
+                                        <span class="mt-2 px-1 bg-secondary text-light" style="background-color: #6c757d; color:#FFF;">フォローされています</span>
                                     @endif
                                 @endif
                             </div>

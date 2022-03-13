@@ -4,18 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="background-color: white; margin: 2rem; padding: 2rem; font-weight:bold; border-radius: 10px; box-shadow: 0 0 8px gray;">{{ $user->name }}の編集画面</div>
+            <div class="card" >
+                <div class="card-header" style="background-color: white; margin: 1rem auto 2rem auto; padding: 2rem; font-weight:bold; border-radius: 10px; box-shadow: 0 0 8px gray; width: 80vw;">{{ $user->name }}の編集画面</div>
 
-                <div class="card-body" style="background-color: white; border-radius: 10px; box-shadow: 0 0 8px gray;">
+                <div class="card-body" style="background-color: white; border-radius: 10px; box-shadow: 0 0 8px gray; width: 80%; margin: 0 auto 0 auto;">
                     <form method="POST" action="{{ url('users/' .$user->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
-                        <div class="form-group row align-items-center" style="display: flex; justify-content: space-between; margin: 2rem; padding: 2rem; text-align:center;">
+                        <div class="form-group row align-items-center" style="display: flex; justify-content: space-between; margin: 1rem; text-align:center;">
                             <label for="profile_image" class="col-md-4 col-form-label text-md-right">{{ __('プロフィール画像') }}</label>
 
-                            <div class="col-md-6 d-flex align-items-center" style="display: flex; align-items:center;">
+                            <div class="col-md-6 d-flex align-items-center" style="">
                                 <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="mr-2 rounded-circle" width="80" height="80" alt="profile_image">
                                 <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror" autocomplete="profile_image">
 
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="form-group row" style="display: flex; justify-content: space-between; margin: 2rem; padding: 2rem; text-align:center;">
-                            <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('Account Name') }}</label>
+                            <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('アカウント名') }}</label>
 
                             <div class="col-md-6">
                                 <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="screen_name" value="{{ $user->screen_name }}" required autocomplete="screen_name" autofocus>
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="form-group row" style="display: flex; justify-content: space-between; margin: 2rem; padding: 2rem; text-align:center;">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ニックネーム') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group row" style="display: flex; justify-content: space-between; margin: 2rem; padding: 2rem; text-align:center;">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('メールアドレス') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">

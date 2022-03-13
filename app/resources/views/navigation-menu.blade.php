@@ -164,8 +164,8 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                <x-jet-responsive-nav-link href="{{ route('users.edit', auth()->user()->id) }}" :active="request()->routeIs('profile.show')">
+                    {{ __('プロフィール編集') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -180,7 +180,7 @@
 
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('ログアウト') }}
                     </x-jet-responsive-nav-link>
                 </form>
 
