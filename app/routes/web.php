@@ -34,3 +34,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //});
 
 Route::get('sample/log', [SampleController::class, 'log']);
+
+Route::get('dashboard', function(){
+    return redirect('users');
+});
