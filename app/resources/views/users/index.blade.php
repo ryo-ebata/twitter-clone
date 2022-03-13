@@ -7,7 +7,7 @@
                 @foreach ($all_users as $user)
                     <div class="card" style="width: 80vw;">
                         <div class="card-haeder p-3 w-100 d-flex" style="display: flex; padding: 1rem; border: solid silver; background-color: #fff; width: 100%;">
-                            <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50" style="border-radius: 50%;">
+                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50" style="border-radius: 50%;">
                             <div class="ml-2 d-flex flex-column" style="margin-left: 0.5rem; display:flex; flex-direction: column;">
                                 <p class="mb-0" style="margin-bottom: 0;">{{ $user->name }}</p>
                                 <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
