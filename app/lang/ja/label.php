@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'Email' => 'メールアドレス'
+    'Email'                 => 'メールアドレス',
+    'Password'              => 'パスワード',
+    'Confirm'               => 'パスワード確認'
 ];

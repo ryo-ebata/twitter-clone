@@ -44,6 +44,8 @@ class UsersController extends Controller
             $follower->follow($user->id);
             
             return redirect('/users');
+        }else{
+            return redirect('/users');
         }
     }
 
@@ -56,6 +58,8 @@ class UsersController extends Controller
         if($is_following) {
             // フォローしていればフォローを解除する
             $follower->unfollow($user->id);
+            return redirect('/users');
+        }else{
             return redirect('/users');
         }
     }
