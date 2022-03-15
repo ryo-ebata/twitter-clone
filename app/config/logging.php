@@ -50,21 +50,24 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
             'ignore_exceptions' => false,
-        ],
+            'channels' => ['single', 'daily'],
+            'name' => 'stack-channel',
+    ],
 
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
+            'level' => 'debug',
+            'tap' => [App\Logging\SampleTap::class],
         ],
 
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => 14,
+            'level' => 'debug',
+            'days' => 0,
+            'tap' => [App\Logging\SampleTap::class],
         ],
 
         'slack' => [

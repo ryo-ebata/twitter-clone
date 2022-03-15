@@ -5,15 +5,25 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('users.index') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('ユーザー') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('users.show', auth()->user()->id) }}" :active="request()->routeIs('users.show')">
+                        {{ __('プロフィール') }}
+                    </x-jet-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('tweets.create', auth()->user()->id) }}" :active="request()->routeIs('tweets.create')">
+                        {{ __('新規ツイート') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -96,8 +106,8 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                            <x-jet-dropdown-link href="{{ route('users.edit', auth()->user()->id) }}">
+                                {{ __('プロフィール編集') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -114,7 +124,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                         @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('ログアウト') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
@@ -137,8 +147,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                {{ __('ユーザー') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -159,8 +169,8 @@
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
-                <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                <x-jet-responsive-nav-link href="{{ route('users.edit', auth()->user()->id) }}" :active="request()->routeIs('profile.show')">
+                    {{ __('プロフィール編集') }}
                 </x-jet-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -175,7 +185,7 @@
 
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                    @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('ログアウト') }}
                     </x-jet-responsive-nav-link>
                 </form>
 
