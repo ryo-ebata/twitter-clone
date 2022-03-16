@@ -12,6 +12,33 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+        <style>
+            #new_tweet{
+                background-color: #6775f5; 
+                border-radius: 50%; 
+                width: 5rem; 
+                height: 5rem; 
+                position: fixed; 
+                bottom: 2rem; 
+                right: 2rem; 
+                color: white; 
+                font-size: large; 
+                font-weight: bold;
+                transition: transform 0.2s;
+            }
+
+            #new_tweet:hover{
+                transform: scale(1.2, 1.2);
+                box-shadow: 0 0 8px gray;
+            }
+
+            
+
+
+
+
+        </style>
         <!-- Font Awesome -->
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 

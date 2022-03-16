@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center" style="justify-content: center; width: 40rem; margin: 2rem auto 0 auto;">
+    <div class="row justify-content-center" id="create_tweet" style="justify-content: center; width: 80%; margin: 2rem auto 0 auto;">
         <div class="col-md-8">
             <div class="card" style="background-color: white; border-radius: 10px; box-shadow: 0 0 8px gray;">
                 <div class="card-header" style="background-color: #668ad8; padding: 1rem; color: white; border-radius: 10px 10px 0 0; font-weight: bold;">{{ $user->name }}の新規ツイート</div>
