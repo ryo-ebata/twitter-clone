@@ -41,3 +41,5 @@ Route::get('dashboard', function(){
 });
 
 Route::resource('tweets', TweetsController::class);
+
+Route::get('/profile', [UsersController::class, 'edit']);

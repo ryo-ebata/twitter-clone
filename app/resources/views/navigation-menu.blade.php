@@ -223,6 +223,7 @@
         </div>
     </div>
 </nav>
+<!-- New Tweet button -->
 <div>
     <button type="button" id="new_tweet">
         <a href="{{ route('tweets.create', auth()->user()->id) }}">＋</a>

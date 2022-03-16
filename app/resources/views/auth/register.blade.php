@@ -15,6 +15,11 @@
             </div>
 
             <div class="mt-4">
+                <x-jet-label for="screen_name" value="{{ __('label.Nickname') }}" />
+                <x-jet-input id="screen_name" class="block mt-1 w-full" type="text" name="screen_name" :value="old('screen_name')" required autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
                 <x-jet-label for="email" value="{{ __('label.Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
