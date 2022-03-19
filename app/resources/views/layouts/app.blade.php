@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        
 
         <style>
             #new_tweet{
@@ -31,6 +32,7 @@
             #new_tweet:hover{
                 transform: scale(1.2, 1.2);
                 box-shadow: 0 0 8px gray;
+                opacity: 0.8;
             }
 
             
@@ -66,6 +68,13 @@
             <main>
                 @yield('content')
             </main>
+
+            <!-- New Tweet button -->
+            <div>
+                <button type="button" id="new_tweet">
+                    <a href="{{ route('tweets.create', auth()->user()->id) }}">＋</a>
+                </button>
+            </div>
         </div>
 
         @stack('modals')

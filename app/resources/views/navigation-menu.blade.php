@@ -26,6 +26,11 @@
                         {{ __('新規ツイート') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('tweets.index', auth()->user()->id) }}" :active="request()->routeIs('tweets.index')">
+                        {{ __('タイムライン') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -223,9 +228,3 @@
         </div>
     </div>
 </nav>
-<!-- New Tweet button -->
-<div>
-    <button type="button" id="new_tweet">
-        <a href="{{ route('tweets.create', auth()->user()->id) }}">＋</a>
-    </button>
-</div>
