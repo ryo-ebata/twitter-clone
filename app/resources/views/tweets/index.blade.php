@@ -48,7 +48,7 @@
                                 <div class="d-flex align-items-center" style="display: flex;">
                                     <button type="" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
                                     <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
-                            </div>
+                                </div>
                             </div>
                         </div>
                     </div>
