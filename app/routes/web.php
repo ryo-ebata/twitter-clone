@@ -29,7 +29,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
     Route::resource('users', UsersController::class, ['only' => ['index', 'show', 'edit', 'update']]);
 
-    // フォロー/フォロー解除を追加
     Route::post('users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
     Route::delete('users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
 //});

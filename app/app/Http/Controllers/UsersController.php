@@ -27,20 +27,25 @@ class UsersController extends Controller
         ]);
     }
 
-    //フォロー機能
+    /**
+     * 
+     * 
+     * 
+     */
 
-    // フォロー
     public function follow(User $user)
     {
         
         $follower = auth()->user();
-        // フォローしているか
+        /**
+         * 
+         * 
+         * 
+         */
         
         $is_following = $follower->isFollowing($user->id);
-        Log::info($user);
         if (!$is_following) {
             
-            // フォローしていなければフォローする
             $follower->follow($user->id);
             
             return redirect('/users');
@@ -49,14 +54,17 @@ class UsersController extends Controller
         }
     }
 
-    // フォロー解除
+    /**
+     * 
+     * 
+     * 
+     */
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
+        
         $is_following = $follower->isFollowing($user->id);
         if($is_following) {
-            // フォローしていればフォローを解除する
             $follower->unfollow($user->id);
             return redirect('/users');
         }else{
