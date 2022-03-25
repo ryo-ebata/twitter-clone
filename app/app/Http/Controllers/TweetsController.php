@@ -12,6 +12,7 @@ class TweetsController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * Tweet::classに各データを渡す。
      *
      * @return \Illuminate\Http\Response
      */
@@ -19,7 +20,7 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
         $follow_ids = $follower->followingIds($user->id);
-        // followed_idだけ抜き出す
+        /* followed_idだけ抜き出す */
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
 
         $timelines = $tweet->getTimelines($user->id, $following_ids);
@@ -32,8 +33,10 @@ class TweetsController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * 新規投稿画面を返す。
+     * 
      * @return \Illuminate\Http\Response
+     * 
      */
     public function create()
     {
@@ -46,6 +49,8 @@ class TweetsController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * ツイートのバリデーション。
+     * 140字以内の文字列データを tweetStore() で保存する。
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -66,6 +71,7 @@ class TweetsController extends Controller
 
     /**
      * Display the specified resource.
+     * 投稿一覧画面を返すメソッド。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -85,6 +91,7 @@ class TweetsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 投稿編集画面を返すメソッド。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -106,6 +113,8 @@ class TweetsController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 投稿編集用のバリデーション。
+     * 140字以内の文字データを tweetUpdate() で保存する。
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -126,6 +135,7 @@ class TweetsController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 投稿削除用のメソッド。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

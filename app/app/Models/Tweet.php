@@ -18,42 +18,96 @@ class Tweet extends Model
         'text'
     ];
 
+    /**
+     * User::classのデータを参照。
+     * 
+     * @return [type]
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * 一つの投稿に対して、複数のfavoriteのリレーション。
+     * 
+     * @return [type]
+     */
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
     }
 
+    /**
+     * 一つの投稿に対して、複数のコメントのリレーション。
+     * 
+     * @return [type]
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * $user_idと一致する'user_id'の投稿を新着順で1ページ50件表示。
+     * 
+     * @param Int $user_id
+     * 
+     * @return [type]
+     */
     public function getUserTimeLine(Int $user_id)
     {
         return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
     }
 
+    /**
+     * ＄user_idと一致する'user_id'の投稿数をカウントする。
+     * 
+     * @param Int $user_id
+     * 
+     * @return Int
+     */
     public function getTweetCount(Int $user_id)
     {
         return $this->where('user_id', $user_id)->count();
     }
 
+    /**
+     * $follow_ids[]内のデータと一致する'user_id'の投稿を取得し、新着順で1ページ50件表示。
+     * フォローしているアカウントと自身の投稿のみを表示する。
+     * 
+     * @param Int $user_id
+     * @param Array $follow_ids
+     * 
+     * @return [type]
+     */
     public function getTimeLines(Int $user_id, Array $follow_ids)
     {
         $follow_ids[] = $user_id;
         return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
     }
 
+    /**
+     * ツイートを取得するメソッド。
+     * 'user'内の $tweet_id と一致する 'id' の投稿を取得。
+     * 
+     * @param Int $tweet_id
+     * 
+     * @return [type]
+     */
     public function getTweet(Int $tweet_id)
     {
         return $this->with('user')->where('id', $tweet_id)->first();
     }
 
+    /**
+     * ツイートを保存する機能。
+     * 
+     * @param Int $user_id
+     * @param Array $data
+     * 
+     * @return [type]
+     */
     public function tweetStore(Int $user_id, Array $data)
     {
         $this->user_id = $user_id;
@@ -63,11 +117,28 @@ class Tweet extends Model
         return;
     }
 
+    /**
+     * ツイート編集用のデータを取得する。
+     * 'user_id' と 'tweet_id' の一致する投稿を取得する。
+     * 
+     * @param Int $user_id
+     * @param Int $tweet_id
+     * 
+     * @return [type]
+     */
     public function getEditTweet(Int $user_id, Int $tweet_id)
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->first();
     }
 
+    /**
+     * ツイート編集後の保存用メソッド。
+     * 
+     * @param Int $tweet_id
+     * @param Array $data
+     * 
+     * @return [type]
+     */
     public function tweetUpdate(Int $tweet_id, Array $data)
     {
         $this->id = $tweet_id;
@@ -77,6 +148,15 @@ class Tweet extends Model
         return;
     }
 
+    /**
+     * ツイート削除用のメソッド。
+     * 'user_id' と 'tweet_id' の一致する投稿を取得し、 delete()で削除する。
+     * 
+     * @param Int $user_id
+     * @param Int $tweet_id
+     * 
+     * @return [type]
+     */
     public function tweetDestroy(Int $user_id, Int $tweet_id)
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
