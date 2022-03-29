@@ -52,10 +52,8 @@ class UsersController extends Controller
             
             $follower->follow($user->id);
             
-            return redirect('/users');
-        }else{
-            return redirect('/users');
         }
+        return redirect('/users');
     }
 
     /**
@@ -74,9 +72,9 @@ class UsersController extends Controller
         $is_following = $follower->isFollowing($user->id);
         if($is_following) {
             $follower->unfollow($user->id);
-            return redirect('/users');
-        }else{
-            return redirect('/users');
+        }
+        
+        return redirect('/users');
         }
     }
 

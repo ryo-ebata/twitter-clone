@@ -143,7 +143,7 @@ class TweetsController extends Controller
     public function destroy(Tweet $tweet)
     {
         $user = auth()->user();
-        $tweet->tweetDestroy($user->id, $tweet->id);
+        $tweet->destroyTweet($user->id, $tweet->id);
 
         return back();
     }

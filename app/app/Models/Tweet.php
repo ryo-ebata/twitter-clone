@@ -108,7 +108,7 @@ class Tweet extends Model
      * 
      * @return [type]
      */
-    public function tweetStore(Int $user_id, Array $data)
+    public function storeTweet(Int $user_id, Array $data)
     {
         $this->user_id = $user_id;
         $this->text = $data['text'];
@@ -139,7 +139,7 @@ class Tweet extends Model
      * 
      * @return [type]
      */
-    public function tweetUpdate(Int $tweet_id, Array $data)
+    public function updateTweet(Int $tweet_id, Array $data)
     {
         $this->id = $tweet_id;
         $this->text = $data['text'];
@@ -157,7 +157,7 @@ class Tweet extends Model
      * 
      * @return [type]
      */
-    public function tweetDestroy(Int $user_id, Int $tweet_id)
+    public function destroyTweet(Int $user_id, Int $tweet_id)
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }

@@ -20,7 +20,7 @@ class FormController extends Controller
         $user = auth()->user();
         $data = $request->all();
 
-        $tweet->tweetStore($user->id, $data);
+        $tweet->storeTweet($user->id, $data);
         return redirect('tweets');
     }
 
@@ -28,7 +28,7 @@ class FormController extends Controller
         $user = auth()->user();
         $data = $request->all();
 
-        $tweet->tweetUpdate($user->id, $data);
+        $tweet->updateTweet($user->id, $data);
         return redirect('tweets');
     }
 }
