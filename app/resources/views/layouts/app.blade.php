@@ -70,11 +70,13 @@
             </main>
 
             <!-- New Tweet button -->
-            <div>
-                <button type="button" id="new_tweet">
-                    <a href="{{ route('tweets.create', auth()->user()->id) }}">＋</a>
-                </button>
-            </div>
+            <a href="{{ route('tweets.create', auth()->user()->id) }}">
+                <div>
+                    <button type="button" id="new_tweet">
+                        ＋
+                    </button>
+                </div>
+            </a>
         </div>
 
         @stack('modals')
