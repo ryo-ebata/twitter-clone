@@ -57,7 +57,7 @@ class TweetsController extends Controller
      */
     public function store(Request $request, Tweet $tweet)
     {
-        $user = auth()->user();
+        /*$user = auth()->user();
         $data = $request->all();
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140']
@@ -66,7 +66,7 @@ class TweetsController extends Controller
         $validator->validate();
         $tweet->tweetStore($user->id, $data);
 
-        return redirect('tweets');
+        return redirect('tweets');*/
     }
 
     /**
@@ -122,7 +122,7 @@ class TweetsController extends Controller
      */
     public function update(Request $request, Tweet $tweet)
     {
-        $data = $request->all();
+        /*$data = $request->all();
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140']
         ]);
@@ -130,7 +130,7 @@ class TweetsController extends Controller
         $validator->validate();
         $tweet->tweetUpdate($tweet->id, $data);
 
-        return redirect('tweets');
+        return redirect('tweets');*/
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Requests\PostRequest;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\TweetsController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\UsersController;
@@ -41,6 +43,11 @@ Route::middleware('auth')->group( function(){
     Route::get('/profile', function(){
         return redirect('users');
     });
+
+    
 });
+
+Route::post('post', [FormController::class, 'postValidates'])->name('tweet.validates');
+Route::put('update', [FormController::class, 'updateValidates'])->name('edit.validates');
 
 Route::get('sample/log', [SampleController::class, 'log']);
