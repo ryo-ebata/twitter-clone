@@ -17,30 +17,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/* 初期表示されるページ */
 Route::get('/', function () {
         return view('welcome');
 });
 
+/* jetsatreamのログインを抜けたら、usersにリダイレクト */
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('users');
 })->name('dashboard');
 
-//Route::middleware(['middleware', 'auth'])->group( function(){
-
+/* ログインしているユーザー限定のルーティング */
+Route::middleware('auth')->group( function(){
+    /* リソース周り */
     Route::resource('users', UsersController::class, ['only' => ['index', 'show', 'edit', 'update']]);
+    Route::resource('tweets', TweetsController::class);
 
+    /* フォロー、アンフォロー周り */
     Route::post('users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
     Route::delete('users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
-//});
+
+    Route::get('/profile', function(){
+        return redirect('users');
+    });
+});
 
 Route::get('sample/log', [SampleController::class, 'log']);
-
-Route::get('dashboard', function(){
-    return redirect('users');
-});
-
-Route::resource('tweets', TweetsController::class);
-
-Route::get('/profile', function(){
-    return redirect('users');
-});
