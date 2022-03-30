@@ -8,7 +8,7 @@
                 <div class="card-header" style="background-color: #668ad8; padding: 1rem; color: white; border-radius: 10px 10px 0 0; font-weight: bold;">{{ $user->name }}の新規ツイート</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tweet.validates') }}">
+                    <form method="POST" action="{{ route('tweets.store') }}">
                         @csrf
 
                         <div class="form-group row mb-0">

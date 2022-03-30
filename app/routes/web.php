@@ -49,5 +49,6 @@ Route::middleware('auth')->group( function(){
 
 Route::post('post', [FormController::class, 'postValidates'])->name('tweet.validates');
 Route::put('update', [FormController::class, 'updateValidates'])->name('edit.validates');
+Route::put('profile', [FormController::class, 'updateProfile'])->name('edit.profile');
 
 Route::get('sample/log', [SampleController::class, 'log']);

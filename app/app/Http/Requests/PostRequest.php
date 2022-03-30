@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostRequest extends FormRequest
@@ -21,10 +23,10 @@ class PostRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(User $user)
     {
         return [
-            'text' => ['required', 'string', 'max:140']
+            'text' => ['required', 'string', 'max:140'],
         ];
     }
 }

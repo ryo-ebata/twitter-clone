@@ -75,8 +75,8 @@ class UsersController extends Controller
         }
         
         return redirect('/users');
-        }
     }
+    
 
     /**
      * Show the form for creating a new resource.

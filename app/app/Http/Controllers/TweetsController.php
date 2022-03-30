@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
+use App\Http\Requests\PostRequest;
 
 class TweetsController extends Controller
 {
@@ -55,18 +56,13 @@ class TweetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Tweet $tweet)
+    public function store(PostRequest $request, Tweet $tweet)
     {
-        /*$user = auth()->user();
+        $user = auth()->user();
         $data = $request->all();
-        $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140']
-        ]);
+        $tweet->storeTweet($user->id, $data);
 
-        $validator->validate();
-        $tweet->tweetStore($user->id, $data);
-
-        return redirect('tweets');*/
+        return redirect('tweets');
     }
 
     /**
@@ -120,17 +116,11 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tweet $tweet)
+    public function update(PostRequest $request, Tweet $tweet)
     {
-        /*$data = $request->all();
-        $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140']
-        ]);
-
-        $validator->validate();
-        $tweet->tweetUpdate($tweet->id, $data);
-
-        return redirect('tweets');*/
+        $data = $request->all();
+        $tweet->updateTweet($tweet->id, $data);
+        return redirect('tweets');
     }
 
     /**

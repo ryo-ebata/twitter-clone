@@ -8,7 +8,7 @@
                 <div class="card-header" style="background-color: #668ad8; padding: 1rem; color: white; border-radius: 10px 10px 0 0; font-weight: bold;">Update</div>
 
                 <div class="card-body">
-                    <form method="POST" _method="put" action="{{ route('edit.validates', [$tweets->id]) }}">
+                    <form method="POST" action="{{ route('tweets.update', [$tweets->id]) }}">
                         @csrf
                         @method('PUT')
 
