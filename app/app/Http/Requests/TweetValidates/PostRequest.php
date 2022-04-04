@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TweetValidates;
 
 use App\Models\User;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostRequest extends FormRequest
@@ -23,7 +22,7 @@ class PostRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(User $user)
+    public function rules()
     {
         return [
             'text' => ['required', 'string', 'max:140'],

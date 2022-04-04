@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\TweetValidates\PostRequest;
 
 class TweetsController extends Controller
 {
@@ -58,9 +58,9 @@ class TweetsController extends Controller
      */
     public function store(PostRequest $request, Tweet $tweet)
     {
-        $user = auth()->user();
+        $user = auth()->id();
         $data = $request->all();
-        $tweet->storeTweet($user->id, $data);
+        $tweet->storeTweet($user, $data);
 
         return redirect('tweets');
     }
@@ -89,13 +89,13 @@ class TweetsController extends Controller
      * Show the form for editing the specified resource.
      * 投稿編集画面を返すメソッド。
      *
-     * @param  int  $id
+     * @param Tweet $tweet
      * @return \Illuminate\Http\Response
      */
     public function edit(Tweet $tweet)
     {
         $user = auth()->user();
-        $tweets = $tweet->getEditTweet($user->id, $tweet->id);
+        $tweets = $tweet->getTweetEditing($user->id, $tweet->id);
 
         if(!isset($tweets)){
             return redirect('tweets');

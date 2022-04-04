@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Consts\paginateConsts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,8 +21,6 @@ class Tweet extends Model
 
     /**
      * User::classのデータを参照。
-     * 
-     * @return [type]
      */
     public function user()
     {
@@ -30,8 +29,6 @@ class Tweet extends Model
 
     /**
      * 一つの投稿に対して、複数のfavoriteのリレーション。
-     * 
-     * @return [type]
      */
     public function favorites()
     {
@@ -40,8 +37,6 @@ class Tweet extends Model
 
     /**
      * 一つの投稿に対して、複数のコメントのリレーション。
-     * 
-     * @return [type]
      */
     public function comments()
     {
@@ -52,12 +47,10 @@ class Tweet extends Model
      * $user_idと一致する'user_id'の投稿を新着順で1ページ50件表示。
      * 
      * @param Int $user_id
-     * 
-     * @return [type]
      */
     public function getUserTimeLine(Int $user_id)
     {
-        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
+        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(paginateConsts::displayOnOnePage);
     }
 
     /**
@@ -67,7 +60,7 @@ class Tweet extends Model
      * 
      * @return Int
      */
-    public function getTweetCount(Int $user_id)
+    public function getTweetCount(Int $user_id): int
     {
         return $this->where('user_id', $user_id)->count();
     }
@@ -78,13 +71,11 @@ class Tweet extends Model
      * 
      * @param Int $user_id
      * @param Array $follow_ids
-     * 
-     * @return [type]
      */
     public function getTimeLines(Int $user_id, Array $follow_ids)
     {
         $follow_ids[] = $user_id;
-        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(paginateConsts::displayOnOnePage);
     }
 
     /**
@@ -92,8 +83,6 @@ class Tweet extends Model
      * 'user'内の $tweet_id と一致する 'id' の投稿を取得。
      * 
      * @param Int $tweet_id
-     * 
-     * @return [type]
      */
     public function getTweet(Int $tweet_id)
     {
@@ -105,8 +94,6 @@ class Tweet extends Model
      * 
      * @param Int $user_id
      * @param Array $data
-     * 
-     * @return [type]
      */
     public function storeTweet(Int $user_id, Array $data)
     {
@@ -123,10 +110,8 @@ class Tweet extends Model
      * 
      * @param Int $user_id
      * @param Int $tweet_id
-     * 
-     * @return [type]
      */
-    public function getEditTweet(Int $user_id, Int $tweet_id)
+    public function getTweetEditing(Int $user_id, Int $tweet_id)
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->first();
     }
@@ -136,8 +121,6 @@ class Tweet extends Model
      * 
      * @param Int $tweet_id
      * @param Array $data
-     * 
-     * @return [type]
      */
     public function updateTweet(Int $tweet_id, Array $data)
     {
@@ -154,8 +137,6 @@ class Tweet extends Model
      * 
      * @param Int $user_id
      * @param Int $tweet_id
-     * 
-     * @return [type]
      */
     public function destroyTweet(Int $user_id, Int $tweet_id)
     {

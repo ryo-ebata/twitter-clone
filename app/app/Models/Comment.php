@@ -18,9 +18,6 @@ class Comment extends Model
         'text'
     ];
 
-    /**
-     * @return [type]
-     */
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -28,10 +25,8 @@ class Comment extends Model
 
     /**
      * @param Int $tweet_id
-     * 
-     * @return [type]
      */
-    public function getComments(Int $tweet_id)
+    public function getComments(Int $tweet_id): string
     {
         return $this->with('user')->where('tweet_id', $tweet_id)->get();
     }

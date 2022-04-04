@@ -39,19 +39,15 @@ class UsersController extends Controller
      * @param User $user
      * 
      * @see User::isFollowing(), User::follow()
-     * 
-     * @return [type]
      */
     public function follow(User $user)
     {
         
         $follower = auth()->user();
-        
         $is_following = $follower->isFollowing($user->id);
+
         if (!$is_following) {
-            
             $follower->follow($user->id);
-            
         }
         return redirect('/users');
     }
@@ -62,18 +58,15 @@ class UsersController extends Controller
      * @param User $user
      * 
      * @see User::isFollowing(), User::unfollow()
-     * 
-     * @return [type]
      */
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        
         $is_following = $follower->isFollowing($user->id);
+
         if($is_following) {
             $follower->unfollow($user->id);
         }
-        
         return redirect('/users');
     }
     

@@ -35,8 +35,6 @@ class User extends Authenticatable
 
     /**
      * User::class, 'followers', 'followed_id', 'following_id'のリレーション。中間テーブルのデータを参照。
-     * 
-     * @return [type]
      */
     public function followers()
     {
@@ -45,8 +43,6 @@ class User extends Authenticatable
 
     /**
      * User::class, 'followers', 'following_id', 'followed_id'のリレーション。中間テーブルのデータを参照。
-     * 
-     * @return [type]
      */
     public function follows()
     {
@@ -57,8 +53,6 @@ class User extends Authenticatable
      * $user_idと一致する'id'を取得し、1ページ5件表示でページネーションする。
      * 
      * @param Int $user_id
-     * 
-     * @return 
      */
     public function getAllUsers(Int $user_id)
     {
@@ -71,8 +65,6 @@ class User extends Authenticatable
      * @param Int $user_id
      * 
      * @see follows()
-     * 
-     * @return [type]
      */
     public function follow(Int $user_id) 
     {
@@ -85,8 +77,6 @@ class User extends Authenticatable
      * @param Int $user_id
      * 
      * @see follows()
-     * 
-     * @return [type]
      */
     public function unfollow(Int $user_id)
     {
@@ -99,12 +89,10 @@ class User extends Authenticatable
      * @param Int $user_id
      * 
      * @see follows()
-     * 
-     * @return boolean 
      */
-    public function isFollowing(Int $user_id) 
+    public function isFollowing(Int $user_id)
     {
-        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
+        return $this->follows()->where('followed_id', $user_id)->exists('id');
     }
 
     /**
@@ -113,12 +101,10 @@ class User extends Authenticatable
      * @param Int $user_id
      * 
      * @see followers()
-     * 
-     * @return boolean
      */
     public function isFollowed(Int $user_id) 
     {
-        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
+        return $this->followers()->where('following_id', $user_id)->exists('id');
     }
 
     /**
@@ -153,8 +139,6 @@ class User extends Authenticatable
 
     /**
      * @param Array $params
-     * 
-     * @return [type]
      */
     public function updateProfile(Array $params)
     {

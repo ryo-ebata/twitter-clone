@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 /* 初期表示されるページ */
 Route::get('/', function () {
-        return view('welcome');
+    return view('welcome');
 });
 
 /* jetsatreamのログインを抜けたら、usersにリダイレクト */
@@ -44,11 +44,9 @@ Route::middleware('auth')->group( function(){
         return redirect('users');
     });
 
-    
+    Route::post('post', [FormController::class, 'postValidates'])->name('tweet.validates');
+    Route::put('update', [FormController::class, 'updateValidates'])->name('edit.validates');
+    Route::put('profile', [FormController::class, 'updateProfile'])->name('edit.profile');
 });
-
-Route::post('post', [FormController::class, 'postValidates'])->name('tweet.validates');
-Route::put('update', [FormController::class, 'updateValidates'])->name('edit.validates');
-Route::put('profile', [FormController::class, 'updateProfile'])->name('edit.profile');
 
 Route::get('sample/log', [SampleController::class, 'log']);
