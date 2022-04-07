@@ -27,7 +27,7 @@
 
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="{{ asset('js/app.js') }}"></script>
-        <script src="{{ asset('js/script.js') }}"></script>
+        
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

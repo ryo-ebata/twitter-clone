@@ -44,7 +44,7 @@
                                     <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <button type="" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                    <div type="" class="btn p-0 border-0 text-primary w-4 Likes"><div class="Likes-Icon"></div></div>
                                     <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
                                 </div>
                             </div>
@@ -58,4 +58,5 @@
         {{ $timelines->links() }}
     </div>
 </div>
+<script src="{{ asset('js/script.js') }}"></script>
 @endsection
