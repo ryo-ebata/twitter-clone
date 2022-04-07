@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 use phpDocumentor\Reflection\Types\Boolean;
 use App\Consts\paginateConsts;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens;
