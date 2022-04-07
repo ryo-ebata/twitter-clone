@@ -5,6 +5,8 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\TweetsController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FavoritesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,7 +29,7 @@ Route::get('/', function () {
 
 /* jetsatreamのログインを抜けたら、usersにリダイレクト */
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return redirect('users');
+    return redirect('tweets');
 })->name('dashboard');
 
 /* ログインしているユーザー限定のルーティング */
@@ -44,9 +46,8 @@ Route::middleware('auth')->group( function(){
         return redirect('users');
     });
 
-    Route::post('post', [FormController::class, 'postValidates'])->name('tweet.validates');
-    Route::put('update', [FormController::class, 'updateValidates'])->name('edit.validates');
-    Route::put('profile', [FormController::class, 'updateProfile'])->name('edit.profile');
+    Route::resource('comments', CommentsController::class, ['only' => ['store']]);
+    Route::resource('favorites', FavoritesController::class, ['only' => ['store', 'destroy']]);
 });
 
 Route::get('sample/log', [SampleController::class, 'log']);

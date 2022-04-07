@@ -25,7 +25,8 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => ['required', 'string', 'max:140'],
+            'tweet_id'  => ['required', 'integer'],
+            'text'      => ['required', 'string', 'max:140'],
         ];
     }
 }
