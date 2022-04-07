@@ -204,3 +204,7 @@
     box-shadow: 0 0 8px gray; 
     width: 80%;
 }
+
+.user-paginate{
+    display: none;
+}

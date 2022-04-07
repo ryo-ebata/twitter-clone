@@ -52,7 +52,7 @@
             @endforeach
         @endif
     </div>
-    <div class="my-4 d-flex justify-content-center">
+    <div class="user-paginate">
         {{ $timelines->links() }}
     </div>
 </div>
