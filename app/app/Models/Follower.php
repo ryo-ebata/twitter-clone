@@ -21,11 +21,11 @@ class Follower extends Model
     /**
      * フォローしているユーザー数を取得する。
      * 
-     * @param mixed $user_id
+     * @param Int $user_id
      * 
      * @return Int
      */
-    public function getFollowCount($user_id): int
+    public function getFollowCount(Int $user_id): int
     {
         return $this->where('following_id', $user_id)->count();
     }
@@ -33,11 +33,11 @@ class Follower extends Model
     /**
      * フォロワー数を取得する。
      * 
-     * @param mixed $user_id
+     * @param Int $user_id
      * 
      * @return Int
      */
-    public function getFollowerCount($user_id): int
+    public function getFollowerCount(Int $user_id): int
     {
         return $this->where('followed_id', $user_id)->count();
     }

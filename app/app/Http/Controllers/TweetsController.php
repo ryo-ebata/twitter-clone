@@ -58,9 +58,9 @@ class TweetsController extends Controller
      */
     public function store(PostRequest $request, Tweet $tweet)
     {
-        $user = auth()->id();
+        $user_id = auth()->id();
         $data = $request->all();
-        $tweet->storeTweet($user, $data);
+        $tweet->storeTweet($user_id, $data);
 
         return redirect('tweets');
     }
@@ -132,8 +132,8 @@ class TweetsController extends Controller
      */
     public function destroy(Tweet $tweet)
     {
-        $user = auth()->user();
-        $tweet->destroyTweet($user->id, $tweet->id);
+        $user_id = auth()->id();
+        $tweet->destroyTweet($user_id, $tweet->id);
 
         return back();
     }

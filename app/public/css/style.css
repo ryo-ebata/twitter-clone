@@ -1,0 +1,206 @@
+@charset "utf-8";
+
+#new_tweet{
+    background-color: #6775f5; 
+    border-radius: 50%; 
+    width: 5rem; 
+    height: 5rem; 
+    position: fixed; 
+    bottom: 2rem; 
+    right: 2rem; 
+    color: white; 
+    font-size: large; 
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#new_tweet:hover{
+    transform: scale(1.2, 1.2);
+    box-shadow: 0 0 8px gray;
+    opacity: 0.8;
+}
+
+.card-header{
+    margin-top: 1rem;
+    background-color: #668ad8; 
+    padding: 1rem; 
+    color: white; 
+    border-radius: 10px 10px 0 0; 
+    font-weight: bold;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.form-group{
+    margin: 1rem; 
+    padding: 2rem;
+}
+
+.form-label{
+    font-weight: bold; 
+    border: solid 1px #6775f5; 
+    padding: 0.5rem 1rem;
+}
+
+.btn-margin{
+    margin: 2rem;
+}
+
+.btn-submit{
+    display: inline-block; 
+    text-decoration: none; 
+    padding: 0.5rem 1rem; 
+    background: #668ad8; 
+    color: #FFF; 
+    border-bottom: solid 4px #627295; 
+    border-radius: 3px; 
+    margin: 1rem;
+}
+
+.card{
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 0 8px gray;
+}
+
+.flex-content-center{
+    display: flex; 
+    justify-content: center;
+}
+
+.text-secondary{
+    color: #627295;
+}
+
+.btn-flexend{
+    display: flex; 
+    text-align:center; 
+    justify-content: flex-end; 
+    margin-top: 1rem;
+}
+
+.container{
+    position:relative;
+    top: 2rem;
+}
+
+.item{
+    position:absolute; 
+    top: 50%; 
+    left: 20%;  
+    width: 80%;
+}
+
+.content{
+    display: flex; 
+    justify-content:center; 
+    background-color: white; 
+    border-radius: 10px; 
+    box-shadow: 0 0 8px gray;
+}
+
+.flex{
+    display: flex;
+}
+
+.profile-image{
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%;
+}
+
+.font-weight-bold{
+    font-weight:bold; 
+    font-size:larger;
+}
+
+.btn-edit-profile{
+    display: inline-block; 
+    padding: 0.5em 1em; 
+    text-decoration: none; 
+    background: #668ad8; 
+    color: #FFF; 
+    border-bottom: solid 4px #627295; 
+    border-radius: 3px; 
+    margin-left: 1rem;
+}
+
+.user-tweet{
+    column-count: 2; 
+    background-color: white; 
+    margin-top: 1rem; 
+    border-radius: 10px; 
+    box-shadow: 0 0 8px gray;
+}
+
+.btn{
+    display: inline-block; 
+    padding: 0.5em 1em; 
+    text-decoration: none; 
+    color: #FFF; 
+    border-bottom: solid 4px #627295; 
+    border-radius: 3px; 
+    margin-left: 1rem; 
+    font-weight: bold;
+}
+
+.btn-unfollow{
+    background: #dc143c; 
+}
+
+.btn-follow{
+    background: #668ad8; 
+}
+
+.follow-message{
+    background-color: #6c757d; 
+    color:#FFF;
+}
+
+.flex-content-space{
+    display: flex; 
+    justify-content:space-between;
+}
+
+.border-solid{
+    border: solid 1px;
+    padding: 0.5rem;
+    margin: 0.2rem;
+}
+
+.card-footer{
+    display: flex; 
+    justify-content:flex-end; 
+    margin-right: 1rem; 
+    margin-top: 1rem;
+}
+
+.tweet-profile-image{
+    border-radius: 50%; 
+    width: 3rem; 
+    height: 3rem;
+}
+
+.grid{
+    display: grid; 
+    justify-content: center;
+}
+
+.margin-tb-3rem{
+    margin: 3rem 0;
+}
+
+.user-card{
+    width: 80vw;
+}
+
+.tweet-body{
+    column-count: 2; 
+    background-color: white; 
+    margin: 0 auto 0 auto; 
+    border-radius: 10px; 
+    box-shadow: 0 0 8px gray; 
+    width: 80%;
+}

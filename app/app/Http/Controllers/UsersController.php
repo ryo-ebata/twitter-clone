@@ -26,7 +26,7 @@ class UsersController extends Controller
      */
     public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->user()->id);
+        $all_users = $user->getAllUsers(auth()->id());
 
         return view('users.index', [
             'all_users' => $all_users

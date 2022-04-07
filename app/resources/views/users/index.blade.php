@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="wrapper">
-        <div class="row justify-center" style="display: grid; justify-content: center;">
-            <div class="col-md-8" style="margin: 3rem 0; ">
+        <div class="grid">
+            <div class="margin-tb-3rem">
                 @foreach ($all_users as $user)
-                    <div class="card" id="user_card" style="width: 80vw;">
+                    <div class="user-card">
                         <div class="card-haeder p-3 w-100 d-flex" style="display: flex; padding: 1rem; margin: 1rem; background-color: #fff; width: 100%; box-shadow: 0 0 8px gray; border-radius: 10px;">
                             <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" style="border-radius: 50%; width: 3rem; height: 3rem;">
                             <div class="ml-2 d-flex flex-column" style="margin-left: 0.5rem; display:flex; flex-direction: column;">

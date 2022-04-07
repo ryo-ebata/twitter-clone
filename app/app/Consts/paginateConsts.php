@@ -4,5 +4,6 @@ namespace App\Consts;
 
 class paginateConsts
 {
-    public const displayOnOnePage = 50;
+    public const displayTweets = 50;
+    public const displayUsers = 5;
 }

@@ -11,6 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use phpDocumentor\Reflection\Types\Boolean;
+use App\Consts\paginateConsts;
 
 class User extends Authenticatable
 {
@@ -56,7 +57,7 @@ class User extends Authenticatable
      */
     public function getAllUsers(Int $user_id)
     {
-        return $this->Where('id', '<>', $user_id)->paginate(5);
+        return $this->Where('id', '<>', $user_id)->paginate(paginateConsts::displayUsers);
     }
 
     /**
