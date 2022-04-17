@@ -1,56 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="position: relative">
-    <div class="row justify-content-center" style="position:absolute; top: 50%; left: 20%;  width: 80%;">
-        <div class="col-md-8 mb-3" style="display: flex; justify-content:center; background-color: white; border-radius: 10px; box-shadow: 0 0 8px gray;">
-            <div class="card">
-                <div class="d-inline-flex" style="display: flex;">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 mb-3">
+            <div class="card shadow-sm">
+                <div class="d-inline-flex">
                     <div class="p-3 d-flex flex-column">
-                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" style="width: 100px; height: 100px; border-radius: 50%;">
+                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="100" height="100">
                         <div class="mt-3 d-flex flex-column">
-                            <h4 class="mb-0 font-weight-bold" style="font-weight:bold; font-size:larger;">{{ $user->name }}</h4>
-                            <span class="text-secondary" style="font-size: medium;">{{ $user->screen_name }}</span>
+                            <h4 class="font-weight-bold">{{ $user->name }}</h4>
+                            <span class="text-secondary">{{ $user->screen_name }}</span>
                         </div>
                     </div>
-                    <div class="p-3 d-flex flex-column justify-content-between">
-                        <div class="d-flex" style="margin: 2rem;">
-                            <div>
-                                @if ($user->id === Auth::user()->id)
-                                    <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary" style="display: inline-block; padding: 0.5em 1em; text-decoration: none; background: #668ad8; color: #FFF; border-bottom: solid 4px #627295; border-radius: 3px; margin-left: 1rem;">プロフィールを編集する</a>
-                                @else
-                                    @if ($is_following)
-                                        <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
-                                            <button type="submit" class="btn btn-danger" style="display: inline-block; padding: 0.5em 1em; text-decoration: none; background: #dc143c; color: #FFF; border-bottom: solid 4px #627295; border-radius: 3px; margin-left: 1rem; font-weight: bold;">フォロー解除</button>
-                                        </form>
+                    <div>
+                        <div class="p-3 d-flex flex-column justify-content-between">
+                            <div class="d-flex">
+                                <div>
+                                    @if ($user->id === Auth::user()->id)
+                                        <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
                                     @else
-                                        <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
-                                            {{ csrf_field() }}
+                                        @if ($is_following)
+                                            <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-primary" style="display: inline-block; padding: 0.5em 1em; text-decoration: none; background: #668ad8; color: #FFF; border-bottom: solid 4px #627295; border-radius: 3px; margin-left: 1rem; font-weight: bold;">フォローする</button>
-                                        </form>
-                                    @endif
+                                                <button type="submit" class="btn btn-danger">フォロー解除</button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
+                                                {{ csrf_field() }}
 
-                                    @if ($is_followed)
-                                        <span class="mt-2 px-1 bg-secondary text-light" style="background-color: #6c757d; color:#FFF;">フォローされています</span>
+                                                <button type="submit" class="btn btn-primary">フォローする</button>
+                                            </form>
+                                        @endif
+
+                                        @if ($is_followed)
+                                            <span class="mt-2 px-1 bg-secondary text-light">フォローされています</span>
+                                        @endif
                                     @endif
-                                @endif
+                                </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end" style="display: flex; justify-content:space-between">
-                            <div class="p-2 d-flex flex-column align-items-center" style="border: solid 1px;">
-                                <p class="font-weight-bold" style="font-weight: bold;">ツイート数</p>
+                        <div class="d-flex justify-content-end">
+                            <div class="p-2 d-flex flex-column align-items-center">
+                                <p class="font-weight-bold">ツイート数</p>
                                 <span>{{ $tweet_count }}</span>
                             </div>
-                            <div class="p-2 d-flex flex-column align-items-center" style="border: solid 1px;">
-                                <p class="font-weight-bold" style="font-weight: bold;">フォロー数</p>
+                            <div class="p-2 d-flex flex-column align-items-center">
+                                <p class="font-weight-bold">フォロー数</p>
                                 <span>{{ $follow_count }}</span>
                             </div>
-                            <div class="p-2 d-flex flex-column align-items-center" style="border: solid 1px;">
-                                <p class="font-weight-bold" style="font-weight: bold;">フォロワー数</p>
+                            <div class="p-2 d-flex flex-column align-items-center">
+                                <p class="font-weight-bold">フォロワー数</p>
                                 <span>{{ $follower_count }}</span>
                             </div>
                         </div>
@@ -60,24 +62,24 @@
         </div>
         @if (isset($timelines))
             @foreach ($timelines as $timeline)
-                <div class="col-md-8 mb-3" style="column-count: 2; background-color: white; margin-top: 1rem; border-radius: 10px; box-shadow: 0 0 8px gray;">
-                    <div class="card">
+                <div class="col-md-8 mb-3">
+                    <div class="card shadow-sm">
                         <div class="card-haeder p-3 w-100 d-flex">
-                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" style="border-radius: 50%; width: 3rem; height: 3rem;">
+                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
                             <div class="ml-2 d-flex flex-column flex-grow-1">
                                 <p class="mb-0">{{ $timeline->user->name }}</p>
-                                <a href="{{ url('users/' .$timeline->user->id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
+                                <a href="{{ url('users/' .$timeline->user->id) }}">{{ $timeline->user->screen_name }}</a>
                             </div>
-                            <div class="d-flex justify-content-end flex-grow-1">
-                                <p class="mb-0 text-secondary">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
+                            <div>
+                                <p>{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
                             </div>
                         </div>
                         <div class="card-body">
                             {{ $timeline->text }}
                         </div>
-                        <div class="card-footer py-1 d-flex justify-content-end" style="display: flex; justify-content:flex-end; margin-right: 1rem; margin-top: 1rem;">
+                        <div class="card-footer py-1 d-flex justify-content-end bg-white">
                             @if ($timeline->user->id === Auth::user()->id)
-                                <div class="dropdown mr-3 d-flex align-items-center" style="display: flex; align-items:center;">
+                                <div class="dropdown mr-3 d-flex align-items-center">
                                     <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v fa-fw"></i>
                                     </a>
@@ -92,16 +94,31 @@
                                     </div>
                                 </div>
                             @endif
-                            <div style="display: flex;">
-                                <div class="mr-3 d-flex align-items-center" style="display: flex;">
-                                    <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                    <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
-                                </div>
-                                <div class="d-flex align-items-center" style="display: flex;">
-                                    <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                    <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
-                                </div>
+
+
+                            <div class="mr-3 d-flex align-items-center">
+                                <a href="{{ url('tweets/' .$timeline->id) }}"><i class="far fa-comment fa-fw"></i></a>
+                                <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
                             </div>
+                            <div class="d-flex align-items-center">
+                                @if (!in_array(Auth::user()->id, array_column($timeline->favorites->toArray(), 'user_id'), TRUE))
+                                    <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
+                                        @csrf
+
+                                        <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
+                                        <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                    </form>
+                                @else
+                                    <form method="POST"action="{{ url('favorites/' .array_column($timeline->favorites->toArray(), 'id', 'user_id')[Auth::user()->id]) }}" class="mb-0">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                    </form>
+                                @endif
+                                <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -18,17 +18,35 @@ class Follower extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    public function getFollowCount($user_id)
+    /**
+     * フォローしているユーザー数を取得する。
+     * 
+     * @param Int $user_id
+     * 
+     * @return Int
+     */
+    public function getFollowCount(Int $user_id): int
     {
         return $this->where('following_id', $user_id)->count();
     }
 
-    public function getFollowerCount($user_id)
+    /**
+     * フォロワー数を取得する。
+     * 
+     * @param Int $user_id
+     * 
+     * @return Int
+     */
+    public function getFollowerCount(Int $user_id): int
     {
         return $this->where('followed_id', $user_id)->count();
     }
 
-    // フォローしているユーザのIDを取得
+    /**
+     * フォローしているユーザーのIDを取得する。
+     * 
+     * @param Int $user_id
+     */
     public function followingIds(Int $user_id)
     {
         return $this->where('following_id', $user_id)->get('followed_id');

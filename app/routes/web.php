@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Requests\PostRequest;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\TweetsController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\FavoritesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,27 +21,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+/* 初期表示されるページ */
 Route::get('/', function () {
     return view('welcome');
 });
 
+/* jetsatreamのログインを抜けたら、usersにリダイレクト */
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('tweets');
 })->name('dashboard');
 
-//Route::middleware(['middleware', 'auth'])->group( function(){
-
+/* ログインしているユーザー限定のルーティング */
+Route::middleware('auth')->group( function(){
+    /* リソース周り */
     Route::resource('users', UsersController::class, ['only' => ['index', 'show', 'edit', 'update']]);
+    Route::resource('tweets', TweetsController::class);
 
-    // フォロー/フォロー解除を追加
+    /* フォロー、アンフォロー周り */
     Route::post('users/{user}/follow', [UsersController::class, 'follow'])->name('follow');
     Route::delete('users/{user}/unfollow', [UsersController::class, 'unfollow'])->name('unfollow');
-//});
 
-Route::get('sample/log', [SampleController::class, 'log']);
+    Route::get('/profile', function(){
+        return redirect('users');
+    });
 
-Route::get('dashboard', function(){
-    return redirect('users');
+    Route::resource('comments', CommentsController::class, ['only' => ['store']]);
+    Route::resource('favorites', FavoritesController::class, ['only' => ['store', 'destroy']]);
 });
 
-Route::resource('tweets', TweetsController::class);
+Route::get('sample/log', [SampleController::class, 'log']);

@@ -5,27 +5,28 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('users.index') }}">
+                    <a href="{{ route('tweets.index') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                        {{ __('ユーザー') }}
+                    <x-jet-nav-link href="{{ route('tweets.index', auth()->user()->id) }}" :active="request()->routeIs('tweets.index')" style="text-decoration: none;">
+                        {{ __('タイムライン') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('users.show', auth()->user()->id) }}" :active="request()->routeIs('users.show')">
+                    <x-jet-nav-link href="{{ route('users.show', auth()->user()->id) }}" :active="request()->routeIs('users.show')" style="text-decoration: none;">
                         {{ __('プロフィール') }}
                     </x-jet-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('tweets.create', auth()->user()->id) }}" :active="request()->routeIs('tweets.create')">
-                        {{ __('新規ツイート') }}
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')" style="text-decoration: none;">
+                        {{ __('ユーザー') }}
                     </x-jet-nav-link>
                 </div>
+                
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

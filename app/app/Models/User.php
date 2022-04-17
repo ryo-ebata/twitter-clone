@@ -11,6 +11,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use phpDocumentor\Reflection\Types\Boolean;
+use App\Consts\paginateConsts;
+
 
 class User extends Authenticatable
 {
@@ -33,45 +35,78 @@ class User extends Authenticatable
         'password'
     ];
 
+    /**
+     * User::class, 'followers', 'followed_id', 'following_id'のリレーション。中間テーブルのデータを参照。
+     */
     public function followers()
     {
         return $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
     }
 
+    /**
+     * User::class, 'followers', 'following_id', 'followed_id'のリレーション。中間テーブルのデータを参照。
+     */
     public function follows()
     {
         return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
     }
 
+    /**
+     * $user_idと一致する'id'を取得し、1ページ5件表示でページネーションする。
+     * 
+     * @param Int $user_id
+     */
     public function getAllUsers(Int $user_id)
     {
-        return $this->Where('id', '<>', $user_id)->paginate(5);
+        return $this->Where('id', '<>', $user_id)->paginate(paginateConsts::displayUsers);
     }
 
-    // フォローする
+    /**
+     * follows()で定義した中間テーブルに、紐付けデータを保存する。紐付けされている場合はフォロー状態。引数にはフォローしたいユーザーのIDを渡す。
+     * 
+     * @param Int $user_id
+     * 
+     * @see follows()
+     */
     public function follow(Int $user_id) 
     {
         return $this->follows()->attach($user_id);
     }
 
-    // フォロー解除する
+    /**
+     * follows()で定義した中間テーブルの紐付けデータを削除する。紐付けがないので、アンフォローの状態。引数にはフォロー解除したいユーザーのIDを渡す。
+     * 
+     * @param Int $user_id
+     * 
+     * @see follows()
+     */
     public function unfollow(Int $user_id)
     {
         return $this->follows()->detach($user_id);
     }
 
-    // フォローしているか
-    public function isFollowing(Int $user_id) 
+    /**
+     * フォローしているかどうかを、follows()中間テーブル内のレコードの有無で判断する。
+     * 
+     * @param Int $user_id
+     * 
+     * @see follows()
+     */
+    public function isFollowing(Int $user_id)
     {
-        //      T or F   User::class       'followed_id'カラム = $user_id   idが存在するか
-        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
-
+        return $this->follows()->where('followed_id', $user_id)->exists('id');
     }
 
-    // フォローされているか
+    /**
+     * フォローされているかどうかを、followers()中間テーブル内のレコードの有無で判断する。
+     * 
+     * @param Int $user_id
+     * 
+     * @see followers()
+     */
     public function isFollowed(Int $user_id) 
     {
-        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
+        return $this->followers()->where('following_id', $user_id)->exists('id');
     }
 
     /**
@@ -104,6 +139,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * @param Array $params
+     */
     public function updateProfile(Array $params)
     {
         if (isset($params['profile_image'])) {

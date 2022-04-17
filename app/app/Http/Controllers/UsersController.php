@@ -14,51 +14,62 @@ use illuminate\Support\Facades\Auth;
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * ユーザーの全ID取得し、viewを返す。
+     * 
+     * @access public
+     * 
+     * @param  User $user
+     * 
+     * @see User::getAllUsers()
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(User $user)
     {
-        $all_users = $user->getAllUsers(auth()->user()->id);
+        $all_users = $user->getAllUsers(auth()->id());
 
         return view('users.index', [
             'all_users' => $all_users
         ]);
     }
 
-    //フォロー機能
-
-    // フォロー
+    /**
+     * isFollowing()でフォロー状態をbooleanで返し、フォローしていなかった場合はUser::follow()で紐付けする。
+     * 
+     * @param User $user
+     * 
+     * @see User::isFollowing(), User::follow()
+     */
     public function follow(User $user)
     {
         
         $follower = auth()->user();
-        // フォローしているか
-        
         $is_following = $follower->isFollowing($user->id);
-        Log::info($user);
+
         if (!$is_following) {
-            
-            // フォローしていなければフォローする
             $follower->follow($user->id);
-            
-            return redirect('/users');
         }
+        return redirect('/users');
     }
 
-    // フォロー解除
+    /**
+     * isFollwing()でフォロー状態をbooleanで返し、フォローしていた場合User::unfollow()で紐付けを解除する。
+     * 
+     * @param User $user
+     * 
+     * @see User::isFollowing(), User::unfollow()
+     */
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->id);
+
         if($is_following) {
-            // フォローしていればフォローを解除する
             $follower->unfollow($user->id);
-            return redirect('/users');
         }
+        return redirect('/users');
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -110,6 +121,7 @@ class UsersController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * ユーザー編集画面を返す。
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -121,6 +133,8 @@ class UsersController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * $requestで取得したデータにバリデーションをかける。
+     * Rule::unique()で、重複したデータを弾くように設定する。
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
